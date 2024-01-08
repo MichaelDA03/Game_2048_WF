@@ -26,6 +26,12 @@ namespace Game_2048_WF
 
         private void InitializeGame()
         {
+            //We print the base square where all the tiles will fit
+            Panel backgroundPanel = new Panel();
+            backgroundPanel.Bounds = new Rectangle(52, 95, 405, 405);
+            backgroundPanel.BackColor = Color.FromArgb(115, 92, 72);
+            this.Controls.Add(backgroundPanel);
+
             //Loop to create the labels
             for (int line = 0; line < 4; line++)
             {
@@ -36,14 +42,14 @@ namespace Game_2048_WF
                     // the 20 + 100 * colonne determines where the first label will be on the X axis
                     // the 20 + 100 * ligne determines where the first label will be on the Y axis
                     // the 100, 100 is the label's size
-                    label[line, column].Bounds = new Rectangle(57 + 100 * column, 100 + 100 * line, 95, 95);
+                    label[line, column].Bounds = new Rectangle(5 + 100 * column, 5 + 100 * line, 95, 95);
 
-                    //we place te test in the middle of the label
+                    //we place the test in the middle of the label and set it to 0
                     label[line, column].TextAlign = ContentAlignment.MiddleCenter;
                     label[line, column].Font = new Font("Arial", 20);
 
-                    //We make visible on the page
-                    Controls.Add(label[line, column]);
+                    //We add the labels to the background panel
+                    backgroundPanel.Controls.Add(label[line, column]);
                 }
             }
 
@@ -62,15 +68,79 @@ namespace Game_2048_WF
             {
                 for(int column = 0;column < 4; column++)
                 {
+                    
+                    //
+                    // A VOIR POUR LES CHIFFRES
+                    //
+
+
+                    //string valueText = label[line, column].Text;
+
+                    //int valueInt = Int32.Parse(valueText);
+
+
+                    /*
                     if (grid[line, column] > 0)
                     {
+                        int value = grid[line, column];
+
                         label[line, column].Text = grid[line, column].ToString();
                     }
                     else
                     {
                         label[line, column].Text = "";
-                    }
+                    }*/
                     
+                    switch (valueInt)
+                    {
+                        case 0:
+                            Console.ForegroundColor = ConsoleColor.DarkGray;
+                            return;
+
+                        case 2:
+                            Console.ForegroundColor = ConsoleColor.DarkBlue;
+                            break;
+
+                        case 4:
+                            Console.ForegroundColor = ConsoleColor.Blue;
+                            break;
+
+                        case 8:
+                            Console.ForegroundColor = ConsoleColor.DarkCyan;
+                            break;
+
+                        case 16:
+                            Console.ForegroundColor = ConsoleColor.Cyan;
+                            break;
+
+                        case 32:
+                            Console.ForegroundColor = ConsoleColor.DarkGreen;
+                            break;
+                        case 64:
+                            Console.ForegroundColor = ConsoleColor.Green;
+                            break;
+
+                        case 128:
+                            Console.ForegroundColor = ConsoleColor.DarkYellow;
+                            break;
+
+                        case 256:
+                            Console.ForegroundColor = ConsoleColor.Yellow;
+                            break;
+
+                        case 512:
+                            Console.ForegroundColor = ConsoleColor.Red;
+                            break;
+
+                        case 1024:
+                            Console.ForegroundColor = ConsoleColor.DarkRed;
+                            break;
+
+                        case 2048:
+                            Console.ForegroundColor = ConsoleColor.Magenta;
+                            break;
+                    }
+
                     label[line, column].BackColor = color[grid[line, column]];
                 }
             }
