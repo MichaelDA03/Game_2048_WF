@@ -115,7 +115,7 @@ namespace Game_2048_WF
             {
                 int randomIndex = random.Next(emptyTiles.Count);
                 Tuple<int,int> randomEmptyTile = emptyTiles[randomIndex];
-                int newValue = (random.Next(10) == 0) ? 1024 : 512;
+                int newValue = (random.Next(10) == 0) ? 4 : 2;
                 grid[randomEmptyTile.Item1, randomEmptyTile.Item2] = newValue;
             }
         }
