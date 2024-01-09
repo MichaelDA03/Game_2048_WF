@@ -33,7 +33,6 @@ namespace Game_2048_WF
             this.lbl2048 = new System.Windows.Forms.Label();
             this.lblScore = new System.Windows.Forms.Label();
             this.lblNumScore = new System.Windows.Forms.Label();
-            this.btnExit = new System.Windows.Forms.Button();
             this.SuspendLayout();
             // 
             // lbl2048
@@ -66,25 +65,12 @@ namespace Game_2048_WF
             this.lblNumScore.TabIndex = 4;
             this.lblNumScore.Text = "0";
             // 
-            // btnExit
-            // 
-            this.btnExit.BackColor = System.Drawing.Color.Snow;
-            this.btnExit.ForeColor = System.Drawing.SystemColors.ControlText;
-            this.btnExit.Location = new System.Drawing.Point(230, 548);
-            this.btnExit.Name = "btnExit";
-            this.btnExit.Size = new System.Drawing.Size(75, 23);
-            this.btnExit.TabIndex = 5;
-            this.btnExit.Text = "EXIT";
-            this.btnExit.UseVisualStyleBackColor = false;
-            this.btnExit.Click += new System.EventHandler(this.btnExit_Click);
-            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(217)))), ((int)(((byte)(208)))), ((int)(((byte)(199)))));
-            this.ClientSize = new System.Drawing.Size(526, 595);
-            this.Controls.Add(this.btnExit);
+            this.ClientSize = new System.Drawing.Size(526, 581);
             this.Controls.Add(this.lblNumScore);
             this.Controls.Add(this.lblScore);
             this.Controls.Add(this.lbl2048);
@@ -95,14 +81,15 @@ namespace Game_2048_WF
             this.Text = "2048";
             this.ResumeLayout(false);
             this.PerformLayout();
+            this.KeyDown += Form1_KeyDown;
 
         }
+
 
         #endregion
         private System.Windows.Forms.Label lbl2048;
         private System.Windows.Forms.Label lblScore;
         private System.Windows.Forms.Label lblNumScore;
-        private System.Windows.Forms.Button btnExit;
     }
 }
 
