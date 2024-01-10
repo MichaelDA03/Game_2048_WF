@@ -41,15 +41,15 @@ namespace Game_2048_WF
 
         private void InitializeGame()
         {
-            /*
+            //*
             //We print the base panel for the score
-            Panel PnlScore = new Panel();
+            this.PnlScore = new Panel();
             PnlScore.Bounds = new Rectangle(370, 35, 100, 50);
             PnlScore.BackColor = Color.FromArgb(115, 92, 72);
             this.Controls.Add(PnlScore);
 
             //We print the label that mentions "Votre score"
-            Label lblScore = new Label();
+            this.lblScore = new Label();
             lblScore.Text = "Votre score:";
             lblScore.Bounds = new Rectangle(6, 5, 90, 15);
             lblScore.TextAlign = ContentAlignment.MiddleCenter;
@@ -57,13 +57,13 @@ namespace Game_2048_WF
             PnlScore.Controls.Add(lblScore);
 
             //We print the label that will mention the user's actual score
-            Label lblScoreVal = new Label();
+            this.lblScoreVal = new Label();
             lblScoreVal.Text = "0";
             lblScoreVal.Bounds = new Rectangle(6, 25, 90, 15);
             lblScoreVal.TextAlign = ContentAlignment.MiddleCenter;
             lblScoreVal.Font = new Font("Arial", 11);
             PnlScore.Controls.Add(lblScoreVal);
-            */
+            //*/
 
             //We print the base square where all the tiles will fit
             Panel backgroundPanel = new Panel();
@@ -195,6 +195,7 @@ namespace Game_2048_WF
                 nb3 = 0;
                 score += nb2;
             }
+            this.lblScoreVal.Text = score.ToString();
             int[] ordre = { nb0, nb1, nb2, nb3 };
             return ordre;
         }
