@@ -39,16 +39,8 @@ namespace Game_2048_WF
             InitializeGame();
         }
 
-        private void InitializeMenu()
-        {
-
-            //The menu panel
-            Panel PnlMenu = new Panel();
-        }
-
         private void InitializeGame()
         {
-            //*
             //We print the base panel for the score
             this.PnlScore = new Panel();
             PnlScore.Bounds = new Rectangle(370, 35, 100, 50);
@@ -60,7 +52,8 @@ namespace Game_2048_WF
             lblScore.Text = "Votre score:";
             lblScore.Bounds = new Rectangle(6, 5, 90, 15);
             lblScore.TextAlign = ContentAlignment.MiddleCenter;
-            lblScore.Font = new Font("Arial", 11);
+            lblScore.Font = new Font("Franklin Gothic", 11);
+            lblScore.ForeColor = Color.White;
             PnlScore.Controls.Add(lblScore);
 
             //We print the label that will mention the user's actual score
@@ -68,9 +61,9 @@ namespace Game_2048_WF
             lblScoreVal.Text = "0";
             lblScoreVal.Bounds = new Rectangle(6, 25, 90, 15);
             lblScoreVal.TextAlign = ContentAlignment.MiddleCenter;
-            lblScoreVal.Font = new Font("Arial", 11);
+            lblScoreVal.Font = new Font("Franklin Gothic", 11);
+            lblScoreVal.ForeColor = Color.White;
             PnlScore.Controls.Add(lblScoreVal);
-            //*/
 
             //We print the base square where all the tiles will fit
             Panel backgroundPanel = new Panel();
@@ -92,7 +85,7 @@ namespace Game_2048_WF
 
                     //we place the text in the middle of the label
                     label[line, column].TextAlign = ContentAlignment.MiddleCenter;
-                    label[line, column].Font = new Font("Arial", 20);
+                    label[line, column].Font = new Font("Franklin Gothic", 20);
 
                     //We add the labels to the background panel
                     backgroundPanel.Controls.Add(label[line, column]);
@@ -226,6 +219,7 @@ namespace Game_2048_WF
                         }
                     }
                     Array.Copy(bufferGrid, grid, grid.Length);
+                    newTile();
                     break;
 
                 //If we go DOWN
@@ -242,6 +236,7 @@ namespace Game_2048_WF
                         }
                     }
                     Array.Copy (bufferGrid, grid, grid.Length);
+                    newTile();
                     break;
 
                 //If we move LEFT
@@ -256,6 +251,7 @@ namespace Game_2048_WF
                         }
                     }
                     Array.Copy(bufferGrid, grid, grid.Length);
+                    newTile();
                     break;
 
                 //If we move RIGHT
@@ -272,11 +268,37 @@ namespace Game_2048_WF
                         }
                     }
                     Array.Copy(bufferGrid, grid, grid.Length);
+                    newTile();
+                    break;
+
+                default:
                     break;
             }
-            newTile();
             Print();
             weDidIt();
+
+            //If we lose
+            if(!canMove(grid))
+            {
+                /*
+                //The defeat panel in which the losing message will show
+                Panel PnlDefaite = new Panel();
+                PnlDefaite.Bounds = new Rectangle(150, 150, 250, 200);
+                PnlDefaite.BackColor = Color.FromArgb(115, 92, 72);
+                this.Controls.Add(PnlDefaite);
+
+                Label lblDefaite = new Label();
+                lblDefaite.TextAlign = ContentAlignment.MiddleCenter;
+                lblDefaite.Font = new Font("Franklin Gothic", 15);
+                lblDefaite.ForeColor = Color.White;
+                PnlDefaite.Controls.Add(lblDefaite);
+                */
+
+                this.PnlDefaite.Visible = true;
+                
+
+
+            }
         }
 
         //We use this method to give the tiles colors depending on what their value is
@@ -346,11 +368,55 @@ namespace Game_2048_WF
             }
         }
 
-        private void canMove()
+        private bool canMove(int[,] table)
         {
-
+            for(int li = 0;  li < table.GetLength(0); li++)
+            {
+                for(int col = 0; col < table.GetLength(1); col++)
+                {
+                    if (table[li, col] == 0)
+                    {
+                        return true;
+                    }
+                    if(li < table.GetLength(0) - 1 && table[li, col] == table[li + 1, col])
+                    {
+                        return true;
+                    }
+                    if (col < table.GetLength(0) - 1 && table[li, col] == table[li, col + 1])
+                    {
+                        return true;
+                    }
+                }
+            }
+            return false;
         }
 
+        private void btnRestart_Click(object sender, EventArgs e)
+        {
+            this.PnlDefaite.Visible = false;
 
+            this.lblScoreVal.Text = "0";
+
+            for(int li = 0; li < grid.GetLength(0); li++)
+            {
+                for(int col = 0; col < grid.GetLength(1); col++)
+                {
+                    label[li, col].Text = "";
+
+                    grid[li, col] = 0;
+
+                    labelColor(label[li, col]);
+                }
+            }
+
+            for (int i = 0; i < 2; i++)
+            {
+                newTile();
+                Print();
+            }
+            InitializeGame();
+
+            //Problème: plus de mouvement après restart
+        }
     }
 }
