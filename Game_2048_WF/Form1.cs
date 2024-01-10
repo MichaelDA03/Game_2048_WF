@@ -39,6 +39,13 @@ namespace Game_2048_WF
             InitializeGame();
         }
 
+        private void InitializeMenu()
+        {
+
+            //The menu panel
+            Panel PnlMenu = new Panel();
+        }
+
         private void InitializeGame()
         {
             //*
