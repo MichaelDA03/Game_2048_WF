@@ -31,8 +31,10 @@ namespace Game_2048_WF
         private void InitializeComponent()
         {
             this.lbl2048 = new System.Windows.Forms.Label();
+            this.PnlScore = new System.Windows.Forms.Panel();
+            this.lblScoreVal = new System.Windows.Forms.Label();
             this.lblScore = new System.Windows.Forms.Label();
-            this.lblNumScore = new System.Windows.Forms.Label();
+            this.PnlScore.SuspendLayout();
             this.SuspendLayout();
             // 
             // lbl2048
@@ -45,25 +47,32 @@ namespace Game_2048_WF
             this.lbl2048.TabIndex = 1;
             this.lbl2048.Text = "2048";
             // 
+            // PnlScore
+            // 
+            this.PnlScore.Controls.Add(this.lblScoreVal);
+            this.PnlScore.Controls.Add(this.lblScore);
+            this.PnlScore.Location = new System.Drawing.Point(331, 31);
+            this.PnlScore.Name = "PnlScore";
+            this.PnlScore.Size = new System.Drawing.Size(119, 52);
+            this.PnlScore.TabIndex = 2;
+            // 
+            // lblScoreVal
+            // 
+            this.lblScoreVal.AutoSize = true;
+            this.lblScoreVal.Location = new System.Drawing.Point(54, 32);
+            this.lblScoreVal.Name = "lblScoreVal";
+            this.lblScoreVal.Size = new System.Drawing.Size(13, 13);
+            this.lblScoreVal.TabIndex = 1;
+            this.lblScoreVal.Text = "0";
+            // 
             // lblScore
             // 
             this.lblScore.AutoSize = true;
-            this.lblScore.Font = new System.Drawing.Font("Microsoft Sans Serif", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblScore.Location = new System.Drawing.Point(381, 41);
+            this.lblScore.Location = new System.Drawing.Point(30, 10);
             this.lblScore.Name = "lblScore";
-            this.lblScore.Size = new System.Drawing.Size(89, 18);
-            this.lblScore.TabIndex = 3;
+            this.lblScore.Size = new System.Drawing.Size(64, 13);
+            this.lblScore.TabIndex = 0;
             this.lblScore.Text = "Votre score:";
-            // 
-            // lblNumScore
-            // 
-            this.lblNumScore.AutoSize = true;
-            this.lblNumScore.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblNumScore.Location = new System.Drawing.Point(413, 67);
-            this.lblNumScore.Name = "lblNumScore";
-            this.lblNumScore.Size = new System.Drawing.Size(14, 16);
-            this.lblNumScore.TabIndex = 4;
-            this.lblNumScore.Text = "0";
             // 
             // Form1
             // 
@@ -71,25 +80,25 @@ namespace Game_2048_WF
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(217)))), ((int)(((byte)(208)))), ((int)(((byte)(199)))));
             this.ClientSize = new System.Drawing.Size(526, 581);
-            this.Controls.Add(this.lblNumScore);
-            this.Controls.Add(this.lblScore);
+            this.Controls.Add(this.PnlScore);
             this.Controls.Add(this.lbl2048);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
             this.MaximizeBox = false;
             this.MinimizeBox = false;
             this.Name = "Form1";
             this.Text = "2048";
+            this.PnlScore.ResumeLayout(false);
+            this.PnlScore.PerformLayout();
             this.ResumeLayout(false);
             this.PerformLayout();
-            this.KeyDown += Form1_KeyDown;
 
         }
 
-
         #endregion
         private System.Windows.Forms.Label lbl2048;
+        private System.Windows.Forms.Panel PnlScore;
+        private System.Windows.Forms.Label lblScoreVal;
         private System.Windows.Forms.Label lblScore;
-        private System.Windows.Forms.Label lblNumScore;
     }
 }
 
