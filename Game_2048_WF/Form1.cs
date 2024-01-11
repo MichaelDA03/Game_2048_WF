@@ -35,6 +35,8 @@ namespace Game_2048_WF
 
         public Form1()
         {
+            this.KeyPreview = true;
+
             InitializeComponent();
             InitializeGame();
         }
@@ -145,6 +147,32 @@ namespace Game_2048_WF
             }
         }
 
+        private void btnRestart_Click(object sender, EventArgs e)
+        {
+            this.PnlDefaite.Visible = false;
+
+            this.lblScoreVal.Text = "0";
+
+            for (int li = 0; li < grid.GetLength(0); li++)
+            {
+                for (int col = 0; col < grid.GetLength(1); col++)
+                {
+                    label[li, col].Text = "";
+
+                    grid[li, col] = 0;
+
+                    labelColor(label[li, col]);
+                }
+            }
+
+            for (int i = 0; i < 2; i++)
+            {
+                newTile();
+                Print();
+            }
+            InitializeGame();
+        }
+
         //We use this method to change the order and merge the tiles in the grid when we move
         private int[] changeOrder(int nb0, int nb1, int nb2, int nb3)
         {
@@ -203,6 +231,13 @@ namespace Game_2048_WF
         //We use this method to move and merge the tiles depending on what key was pressed
         private void Form1_KeyDown(object sender, KeyEventArgs e)
         {
+            //We'll use these variables to check if the movement did something.If it didn't, we don't generate a new number
+            bool hasChanged = false;
+
+            int[,] gridCheck = new int[4, 4];
+
+            Array.Copy(grid, gridCheck, grid.Length);
+
             Keys key = e.KeyCode;
 
             switch (key)
@@ -219,7 +254,28 @@ namespace Game_2048_WF
                         }
                     }
                     Array.Copy(bufferGrid, grid, grid.Length);
-                    newTile();
+
+                    //We check if the grid changed
+                    hasChanged = false;
+                    for(int i = 0;  i < grid.GetLength(0); i++)
+                    {
+                        for(int j = 0;  j < grid.GetLength(1); j++)
+                        {
+                            if (grid[i, j] != gridCheck[i, j])
+                            {
+                                hasChanged = true;
+                                break;
+                            }
+                        }
+                        if (hasChanged)
+                        {
+                            break;
+                        }
+                    }
+                    if(hasChanged == true)
+                    {
+                        newTile();
+                    }
                     break;
 
                 //If we go DOWN
@@ -236,7 +292,27 @@ namespace Game_2048_WF
                         }
                     }
                     Array.Copy (bufferGrid, grid, grid.Length);
-                    newTile();
+
+                    hasChanged = false;
+                    for(int i = 0; i < grid.GetLength(0); i++)
+                    {
+                        for(int j = 0; j < grid.GetLength(1); j++)
+                        {
+                            if (grid[i, j] != gridCheck[i, j])
+                            {
+                                hasChanged =true; 
+                                break;
+                            }
+                        }
+                        if (hasChanged)
+                        {
+                            break;
+                        }
+                    }
+                    if (hasChanged)
+                    {
+                        newTile();
+                    }
                     break;
 
                 //If we move LEFT
@@ -251,7 +327,27 @@ namespace Game_2048_WF
                         }
                     }
                     Array.Copy(bufferGrid, grid, grid.Length);
-                    newTile();
+
+                    hasChanged = false;
+                    for (int i = 0; i < grid.GetLength(0); i++)
+                    {
+                        for (int j = 0; j < grid.GetLength(1); j++)
+                        {
+                            if (grid[i, j] != gridCheck[i, j])
+                            {
+                                hasChanged = true;
+                                break;
+                            }
+                        }
+                        if (hasChanged)
+                        {
+                            break;
+                        }
+                    }
+                    if (hasChanged)
+                    {
+                        newTile();
+                    }
                     break;
 
                 //If we move RIGHT
@@ -268,7 +364,27 @@ namespace Game_2048_WF
                         }
                     }
                     Array.Copy(bufferGrid, grid, grid.Length);
-                    newTile();
+
+                    hasChanged = false;
+                    for (int i = 0; i < grid.GetLength(0); i++)
+                    {
+                        for (int j = 0; j < grid.GetLength(1); j++)
+                        {
+                            if (grid[i, j] != gridCheck[i, j])
+                            {
+                                hasChanged = true;
+                                break;
+                            }
+                        }
+                        if (hasChanged)
+                        {
+                            break;
+                        }
+                    }
+                    if (hasChanged)
+                    {
+                        newTile();
+                    }
                     break;
 
                 default:
@@ -280,24 +396,7 @@ namespace Game_2048_WF
             //If we lose
             if(!canMove(grid))
             {
-                /*
-                //The defeat panel in which the losing message will show
-                Panel PnlDefaite = new Panel();
-                PnlDefaite.Bounds = new Rectangle(150, 150, 250, 200);
-                PnlDefaite.BackColor = Color.FromArgb(115, 92, 72);
-                this.Controls.Add(PnlDefaite);
-
-                Label lblDefaite = new Label();
-                lblDefaite.TextAlign = ContentAlignment.MiddleCenter;
-                lblDefaite.Font = new Font("Franklin Gothic", 15);
-                lblDefaite.ForeColor = Color.White;
-                PnlDefaite.Controls.Add(lblDefaite);
-                */
-
                 this.PnlDefaite.Visible = true;
-                
-
-
             }
         }
 
@@ -391,32 +490,6 @@ namespace Game_2048_WF
             return false;
         }
 
-        private void btnRestart_Click(object sender, EventArgs e)
-        {
-            this.PnlDefaite.Visible = false;
-
-            this.lblScoreVal.Text = "0";
-
-            for(int li = 0; li < grid.GetLength(0); li++)
-            {
-                for(int col = 0; col < grid.GetLength(1); col++)
-                {
-                    label[li, col].Text = "";
-
-                    grid[li, col] = 0;
-
-                    labelColor(label[li, col]);
-                }
-            }
-
-            for (int i = 0; i < 2; i++)
-            {
-                newTile();
-                Print();
-            }
-            InitializeGame();
-
-            //Problème: plus de mouvement après restart
-        }
+        
     }
 }
